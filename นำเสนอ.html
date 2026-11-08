@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>นำเสนอรายงาน: ชุมชนพูนบำเพ็ญ (ฉบับสมบูรณ์เจาะลึก 18 สไลด์)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #090d16 70%), 
+                        linear-gradient(135deg, #020617, #1e1b4b, #090d16);
+            background-size: 200% 200%;
+            animation: gradientMove 12s ease infinite;
+            color: #f8fafc;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body::before, body::after {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: 0;
+            opacity: 0.15;
+            animation: floatOrbs 10s ease-in-out infinite alternate;
+        }
+        body::before {
+            background: #38bdf8;
+            top: -100px;
+            left: -100px;
+        }
+        body::after {
+            background: #f43f5e;
+            bottom: -100px;
+            right: -100px;
+            animation-delay: -5s;
+        }
+
+        @keyframes floatOrbs {
+            0% { transform: translateY(0px) scale(1); }
+            100% { transform: translateY(50px) scale(1.1); }
+        }
+
+        .slides-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            z-index: 10;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.92) translateY(20px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 70px;
+            text-align: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1) translateY(0);
+        }
+        
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: #facc15;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 0 0 35px rgba(250, 204, 21, 0.6);
+        }
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #34d399;
+            margin-bottom: 22px;
+            border-bottom: 4px solid #34d399;
+            padding-bottom: 8px;
+            text-shadow: 0 0 25px rgba(52, 211, 153, 0.5);
+        }
+        h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #38bdf8;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+        }
+        p, li {
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.45;
+            color: #f1f5f9;
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .card {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(52, 211, 153, 0.35);
+            border-radius: 18px;
+            padding: 20px;
+            text-align: left;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: #facc15;
+            background: rgba(15, 23, 42, 0.95);
+            box-shadow: 0 25px 50px rgba(250, 204, 21, 0.35);
+        }
+
+        ul {
+            list-style-type: none;
+            text-align: left;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        li {
+            position: relative;
+            padding-left: 45px;
+            margin-bottom: 10px;
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(10px);
+            padding: 10px 16px 10px 48px;
+            border-radius: 12px;
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            transition: 0.3s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+        li:hover {
+            border-color: #facc15;
+            background: rgba(15, 23, 42, 0.9);
+            transform: translateX(5px);
+        }
+        li::before {
+            content: "🔥";
+            position: absolute;
+            left: 15px;
+            font-size: 1.1rem;
+        }
+
+        .author-box {
+            font-size: 1.5rem;
+            color: #e2e8f0;
+            line-height: 1.6;
+            margin-top: 15px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(15px);
+            padding: 18px 30px;
+            border-radius: 18px;
+            border: 2px solid rgba(250, 204, 21, 0.5);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+
+        .nav-buttons {
+            position: fixed;
+            bottom: 30px;
+            right: 40px;
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+        button {
+            background: linear-gradient(135deg, #facc15 0%, #ca8a04 100%);
+            color: #0f172a;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: 0 6px 25px rgba(250, 204, 21, 0.5);
+            transition: 0.3s;
+            font-family: 'Sarabun', sans-serif;
+        }
+        button:hover {
+            transform: scale(1.08) translateY(-2px);
+            box-shadow: 0 10px 30px rgba(250, 204, 21, 0.8);
+            background: linear-gradient(135deg, #fde047 0%, #eab308 100%);
+        }
+        .slide-number {
+            position: fixed;
+            bottom: 35px;
+            left: 40px;
+            font-size: 1.6rem;
+            color: #34d399;
+            font-weight: 700;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 8px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(52, 211, 153, 0.4);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body>
+
+<div class="slides-container">
+
+    <!-- สไลด์ที่ 1: หน้าปก -->
+    <div class="slide active">
+        <h1>รายงานกลุ่มเรื่อง<br>การประยุกต์ทฤษฎีองค์การและการจัดการสมัยใหม่</h1>
+        <h3 style="color: #34d399; font-size: 2.3rem; margin: 12px 0;">กรณีศึกษา: ชุมชนพูนบำเพ็ญ</h3>
+        <div class="author-box">
+            <strong>เสนอ:</strong> ผศ.ดร.อารี ผสานสินธุวงศ์<br>
+            มหาวิทยาลัยราชภัฏบ้านสมเด็จเจ้าพระยา (ภาคการศึกษา 1/2569)
+        </div>
+    </div>
+
+    <!-- สไลด์ที่ 2: คณะผู้จัดทำ -->
+    <div class="slide">
+        <h2>คณะผู้จัดทำ</h2>
+        <div class="grid-container" style="grid-template-columns: repeat(3, 1fr); max-width: 1400px;">
+            <div class="card" style="text-align: center;">
+                <h3 style="color: #facc15; font-size: 1.6rem;">นายศุภกฤต เกตุสุวรรณ์</h3>
+                <p style="color: #38bdf8; font-size: 1.3rem;">6821310006</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <h3 style="color: #facc15; font-size: 1.6rem;">นายเจษฎาภรณ์ ภัยมณี</h3>
+                <p style="color: #38bdf8; font-size: 1.3rem;">6821310046</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <h3 style="color: #facc15; font-size: 1.6rem;">นายสิรภพ พิพัฒน์</h3>
+                <p style="color: #38bdf8; font-size: 1.3rem;">6821310064</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <h3 style="color: #facc15; font-size: 1.6rem;">นายมูฮัมหมัดอาฟิ กะจิ</h3>
+                <p style="color: #38bdf8; font-size: 1.3rem;">6821310069</p>
+            </div>
+            <div class="card" style="text-align: center; grid-column: span 2;">
+                <h3 style="color: #facc15; font-size: 1.6rem;">นายณัฐพจน์ ศรีนิเวศน์</h3>
+                <p style="color: #38bdf8; font-size: 1.3rem;">6821310059</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- สไลด์ที่ 3: คำนำ -->
+    <div class="slide">
+        <h2>คำนำรายงานเชิงวิชาการ</h2>
+        <ul>
+            <li><strong>บูรณาการความรู้สากล:</strong> จัดทำขึ้นเพื่อศึกษาการเชื่อมโยงระหว่างทฤษฎีองค์การสมัยใหม่กับบริบทสังคมชุมชนท้องถิ่น</li>
+            <li><strong>เจาะลึกกรณีศึกษา:</strong> เลือก "ชุมชนพูนบำเพ็ญ" ชุมชนริมน้ำที่มีเอกลักษณ์ทางวัฒนธรรมและการจัดการตนเอง</li>
+            <li><strong>เป้าหมายเชิงประจักษ์:</strong> นำเครื่องมือบริหารและกรอบแนวคิดเชิงวิชาการมาวิเคราะห์เพื่อสร้างแนวทางพัฒนาที่ยั่งยืน</li>
+        </ul>
+    </div>
+
+    <!-- สไลด์ที่ 4: บทที่ 1 ความสำคัญและที่มา -->
+    <div class="slide">
+        <h2>บทที่ 1: ความสำคัญและที่มาของปัญหา</h2>
+        <div class="grid-container">
+            <div class="card">
+                <h3>🌐 กระแสโลกาภิวัตน์และการพัฒนาเมือง</h3>
+                <p>การขยายตัวของเมือง (Urbanization) ส่งผลกระทบอย่างมีนัยสำคัญต่อโครงสร้างทางสังคมและวิถีชีวิตดั้งเดิมริมน้ำ</p>
+            </div>
+            <div class="card">
+                <h3>🚀 ขีดจำกัดการจัดการแบบดั้งเดิม</h3>
+                <p>ชุมชนไม่สามารถพึ่งพาความคุ้นเคยหรือการบริหารแบบเดิมได้อีกต่อไป จำเป็นต้องอาศัยทฤษฎีการจัดการสมัยใหม่เข้าช่วย</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- สไลด์ที่ 5: วัตถุประสงค์และขอบเขต -->
+    <div class="slide">
+        <h2>วัตถุประสงค์และขอบเขตการศึกษา</h2>
+        <ul>
+            <li><strong>ศึกษาบริบทชุมชน:</strong> สำรวจความเป็นมา วัฒนธรรม และโครงสร้างการบริหารของชุมชนพูนบำเพ็ญ</li>
+            <li><strong>ประยุกต์ทฤษฎี:</strong> นำแนวคิดการจัดการสมัยใหม่และวงจร PDCA มาวิเคราะห์การดำเนินงานของชุมชน</li>
+            <li><strong>ประเมินปัจจัยเชิงกลยุทธ์:</strong> วิเคราะห์จุดแข็ง จุดอ่อน โอกาส และอุปสรรค ผ่านเครื่องมือ SWOT Analysis</li>
+            <li><strong>ขอบเขตการศึกษา:</strong> ชุมชนพูนบำเพ็ญ เขตภาษีเจริญ กรุงเทพมหานคร ในปี พ.ศ. 2569</li>
+        </ul>
+    </div>
+
+    <!-- สไลด์ที่ 6: บทที่ 2 ทฤษฎีองค์การสมัยใหม่ -->
+    <div class="slide">
+        <h2>บทที่ 2: ทฤษฎีองค์การและการจัดการสมัยใหม่</h2>
+        <div class="grid-container">
+            <div class="card">
+                <h3>🔄 ทฤษฎีระบบเปิด (Open Systems)</h3>
+                <p>มององค์การชุมชนเป็นระบบที่เปิดรับและแลกเปลี่ยนทรัพยากร ข้อมูลข่าวสาร และงบประมาณกับสิ่งแวดล้อมภายนอก</p>
+            </div>
+            <div class="card">
+                <h3>🏛️ ทฤษฎีองค์การแห่งการเรียนรู้</h3>
+                <p>ส่งเสริมให้คนในชุมชนเกิดการเรียนรู้ร่วมกัน การปรับตัวต่อความเปลี่ยนแปลง และการพัฒนาทักษะใหม่อย่างต่อเนื่อง</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- สไลด์ที่ 7: การบริหารแบบมีส่วนร่วมและ 4Ps -->
+    <div class="slide">
+        <h2>การบริหารแบบมีส่วนร่วมและเครือข่าย 4Ps</h2>
+        <div class="grid-container">
+            <div class="card">
+                <h3>👥 Participative Management</h3>
+                <p>เปิดโอกาสให้สมาชิกทุกภาคส่วนในชุมชนเข้ามามีส่วนร่วมในการคิดร่วมทำ ร่วมตัดสินใจ และรับผิดชอบร่วมกัน</p>
+            </div>
+            <div class="card">
+                <h3>🌐 เครือข่ายความร่วมมือ (4Ps)</h3>
+                <p>Public-Private-People Partnerships การบูรณาการพลังขับเคลื่อนร่วมกันระหว่างภาครัฐ เอกชน และประชาชน</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- สไลด์ที่ 8: วงจรบริหารคุณภาพ PDCA -->
+    <div class="slide">
+        <h2>เทคนิคการบริหาร: วงจร PDCA Cycle</h2>
+        <div class="grid-container">
+            <div class="card">
+                <h3>1. Plan (วางแผน) & 2. Do (ปฏิบัติ)</h3>
+                <p><strong>Plan:</strong> สำรวจปัญหาและความต้องการที่แท้จริงของชุมชน<br><strong>Do:</strong> ดำเนินโครงการตามแผนด้วยการมีส่วนร่วม</p>
+            </div>
+            <div class="card">
+                <h3>3. Check (ตรวจสอบ) & 4. Act (ปรับปรุง)</h3>
+                <p><strong>Check:</strong> ติดตามประเมินผลและความพึงพอใจ<br><strong>Act:</strong> นำผลสะท้อนมาปรับปรุงกระบวนการทำงานให้ดียิ่งขึ้น</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- สไลด์ที่ 9: ข้อมูลทั่วไปชุมชนพูนบำเพ็ญ -->
+    <div class="slide">
+        <h2>ข้อมูลทั่วไป: ชุมชนพูนบำเพ็ญ</h2>
+        <ul>
+            <li><strong>ที่ตั้งทางภูมิศาสตร์:</strong> ตั้งอยู่ในพื้นที่เขตภาษีเจริญ กรุงเทพมหานคร มีเอกลักษณ์ความเป็นชุมชนริมน้ำดั้งเดิมฝั่งธนบุรี</li>
+            <li><strong>โครงสร้างทางเศรษฐกิจ:</strong> ประชาชนส่วนใหญ่ประกอบอาชีพค้าขาย รับจ้าง และดำเนินธุรกิจขนาดย่อมในครัวเรือน</li>
+            <li><strong>ระบบการบริหารท้องถิ่น:</strong> มีคณะกรรมการชุมชนทำหน้าที่เป็นกลไกหลักในการประสานงานกับสำนักงานเขต จัดระเบียบ และจัดกิจกรรมประเพณี</li>
+        </ul>
+    </div>
+
+    <!-- สไลด์ที่ 10: SWOT Analysis (Strengths) -->
+    <div class="slide">
+        <h2>SWOT Analysis: จุดแข็ง (Strengths)</h2>
+        <ul>
+            <li><strong>ผู้นำชุมชนเข้มแข็ง:</strong> คณะกรรมการมีความเสียสละ อุทิศตน และมีภาวะผู้นำในการขับเคลื่อนกิจกรรม</li>
+            <li><strong>ทุนทางสังคมสูง:</strong> ประชาชนมีความสามัคคี เอื้อเฟื้อเผื่อแผ่ และมีความผูกพันกันสูงในระดับเครือข่ายญาติมิตร/เพื่อนบ้าน</li>
+            <li><strong>อัตลักษณ์วัฒนธรรมริมน้ำ:</strong> มีวิถีชีวิตดั้งเดิมและวัฒนธรรมสายน้ำที่ทรงคุณค่า เป็นเสน่ห์ดึงดูดใจ</li>
+        </ul>
+    </div>
+
+    <!-- สไลด์ที่ 11: SWOT Analysis (Weaknesses) -->
+    <div class="slide">
+        <h2>SWOT Analysis: จุดอ่อน (Weaknesses)</h2>
+        <ul>
+            <li><strong>ข้อจำกัดด้านงบประมาณ:</strong> พึ่งพางบสนับสนุนจากภาครัฐเป็นหลัก ขาดรายได้หมุนเวียนที่เป็นระบบของชุมชนเอง</li>
+            <li><strong>การขาดฐานข้อมูลดิจิทัล:</strong> ระบบการจัดเก็บข้อมูลสมาชิก สถิติ และบัญชีรายรับ-รายจ่ายยังเป็นแบบดั้งเดิม</li>
+            <li><strong>ช่องว่างระหว่างวัย (Generation Gap):</strong> การสืบทอดภูมิปัญญาและการบริหารงานจากคนรุ่นเก่าสู่คนรุ่นใหม่ยังมีข้อจำกัด</li>
+        </ul>
+    </div>
+
+    <!-- สไลด์ที่ 12: SWOT Analysis (Opportunities) -->
+    <div class="slide">
+        <h2>SWOT Analysis: โอกาส (Opportunities)</h2>
+        <ul>
+            <li><strong>นโยบายส่งเสริมการท่องเที่ยว:</strong> รัฐบาลและกรุงเทพมหานครมีนโยบายผลักดันการท่องเที่ยวเชิงวัฒนธรรมและวิถีชีวิตริมคลอง</li>
+            <li><strong>ความก้าวหน้าทางเทคโนโลยี:</strong> สื่อโซเชียลมีเดียและแพลตฟอร์มออนไลน์ช่วยในการประชาสัมพันธ์และสร้างชื่อเสียงให้ชุมชนได้ง่าย</li>
+            <li><strong>กระแสรักสุขภาพและท้องถิ่น:</strong> ผู้บริโภคหันมาให้ความสนใจผลิตภัณฑ์ชุมชน (Local Product) และโฮมสเตย์วิถีไทยมากขึ้น</li>
+        </ul>
+    </div>
+
+    <!-- สไลด์ที่ 13: SWOT Analysis (Threats) -->
+    <div class="slide">
+        <h2>SWOT Analysis: อุปสรรค (Threats)</h2>
+        <ul>
+            <li><strong>การเปลี่ยนแปลงทางกายภาพเมือง:</strong> การขยายตัวของระบบสาธารณูปโภคและตึกรามบ้านช่องที่อาจทำลายวิถีชีวิตริมน้ำ</li>
+            <li><strong>ความเสี่ยงด้านสิ่งแวดล้อม:</strong> ปัญหาน้ำท่วมฉับพลัน การกัดเซาะตลิ่ง และคุณภาพน้ำในคูคลองที่ต้องเฝ้าระวัง</li>
+            <li><strong>การย้ายถิ่นฐานของคนรุ่นใหม่:</strong> เยาวชนและคนรุ่นใหม่ออกไปทำงานในเมืองใหญ่ ทำให้ขาดกำลังคนในการพัฒนาชุมชน</li>
+        </ul>
+    </div>
+
+    <!-- สไลด์ที่ 14: บทที่ 3 บทวิเคราะห์เชิงลึก -->
+    <div class="slide">
+        <h2>บทที่ 3: บทวิเคราะห์เชิงลึก (In-depth Analysis)</h2>
+        <ul>
+            <li><strong>การบูรณาการระบบเปิด:</strong> ชุมชนต้องเชื่อมโยงเครือข่ายพันธมิตรกับสำนักงานเขต มหาวิทยาลัย และเอกชน เพื่อดึงองค์ความรู้</li>
+            <li><strong>การยกระดับวงจร PDCA:</strong> เพิ่มกระบวนการตรวจสอบ (Check) และการประเมินผลโครงการอย่างเป็นระบบเพื่อปิดจุดอ่อน</li>
+            <li><strong>การสืบทอดตำแหน่งผู้นำ:</strong> สร้างกระบวนการพัฒนาผู้นำรุ่นใหม่ (Young Leaders) เพื่อให้การบริหารงานมีความต่อเนื่อง</li>
+        </ul>
+    </div>
+
+    <!-- สไลด์ที่ 15: ข้อเสนอแนะเชิงนโยบาย -->
+    <div class="slide">
+        <h2>ข้อเสนอแนะเชิงนโยบายเพื่อการพัฒนา</h2>
+        <ul>
+            <li><strong>กระจายอำนาจตั้งคณะทำงานย่อย:</strong> แบ่งฝ่ายรับผิดชอบชัดเจน เช่น ด้านสิ่งแวดล้อม ด้านเศรษฐกิจชุมชน และด้านเทคโนโลยี</li>
+            <li><strong>ประยุกต์ใช้เทคโนโลยีดิจิทัล:</strong> พัฒนาเพจชุมชน แพลตฟอร์มออนไลน์เพื่อจำหน่ายสินค้า และจัดทำฐานข้อมูลสมาชิก</li>
+            <li><strong>สร้างเครือข่ายพันธมิตรยั่งยืน:</strong> ร่วมมือกับสถาบันการศึกษาจัดอบรมให้ความรู้เรื่องการตลาดออนไลน์และการบริหารจัดการ</li>
+        </ul>
+    </div>
+
+    <!-- สไลด์ที่ 16: บทสรุปผลการศึกษา -->
+    <div class="slide">
+        <h2>บทสรุปผลการศึกษา</h2>
+        <div class="grid-container">
+            <div class="card">
+                <h3>🎯 สรุปภาพรวมความสำเร็จ</h3>
+                <p>ชุมชนพูนบำเพ็ญมีความพร้อมด้านทุนทางสังคมสูง แต่จำเป็นต้องอาศัยเครื่องมือการจัดการสมัยใหม่และเทคโนโลยีเข้ามาหนุนเสริม</p>
+            </div>
+            <div class="card">
+                <h3>💡 วิสัยทัศน์อนาคตที่ยั่งยืน</h3>
+                <p>การผสมผสานระหว่างภูมิปัญญาท้องถิ่นและการบริหารงานยุคใหม่ จะทำให้ชุมชนพึ่งพาตนเองและรักษาอัตลักษณ์ได้อย่างมั่นคง</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- สไลด์ที่ 17: บรรณานุกรมและภาคผนวก -->
+    <div class="slide">
+        <h2>บรรณานุกรมและภาคผนวก</h2>
+        <ul>
+            <li><strong>บรรณานุกรมหลัก:</strong> ตำราทฤษฎีองค์การและการจัดการสมัยใหม่, เอกสารสำนักงานเขตภาษีเจริญ และข้อมูลท้องถิ่นชุมชน</li>
+            <li><strong>ภาคผนวก:</strong> ภาพถ่ายวิถีชีวิตริมน้ำ, แบบฟอร์มประเมินโครงการตามวงจร PDCA และสัดส่วนการมีส่วนร่วมของคณะผู้จัดทำ</li>
+        </ul>
+    </div>
+
+    <!-- สไลด์ที่ 18: จบการนำเสนอ -->
+    <div class="slide">
+        <h1>ขอขอบพระคุณครับ / ค่ะ 🙏</h1>
+        <h3 style="color: #34d399; margin-top: 25px; font-size: 2.5rem; text-shadow: 0 0 15px rgba(52,211,153,0.5);">Q & A (เปิดโอกาสให้ซักถาม)</h3>
+    </div>
+
+</div>
+
+<!-- ปุ่มควบคุมสไลด์ -->
+<div class="slide-number" id="slideNum">1 / 18</div>
+<div class="nav-buttons">
+    <button onclick="prevSlide()">◀ ก่อนหน้า</button>
+    <button onclick="nextSlide()">ถัดไป ▶</button>
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const slideNumDisplay = document.getElementById('slideNum');
+
+    function showSlide(index) {
+        if (index < 0) index = totalSlides - 1;
+        if (index >= totalSlides) index = 0;
+        currentSlide = index;
+        
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === currentSlide);
+        });
+        slideNumDisplay.innerText = `${currentSlide + 1} / ${totalSlides}`;
+    }
+
+    function nextSlide() {
+        showSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+        showSlide(currentSlide - 1);
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === 'PageDown') {
+            nextSlide();
+        } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+            prevSlide();
+        }
+    });
+</script>
+
+</body>
+</html>
